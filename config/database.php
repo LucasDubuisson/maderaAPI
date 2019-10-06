@@ -2,10 +2,10 @@
 class Database{
  
     // specify your own database credentials
-    private $host = "localhost";
-    private $db_name = "api_db";
-    private $username = "root";
-    private $password = "";
+    private $host = "db5000155983.hosting-data.io";
+    private $db_name = "dbs151070";
+    private $username = "dbu156412";
+    private $password = "WQCzxP.iVZ8SN3G";
     public $conn;
  
     // get the database connection
