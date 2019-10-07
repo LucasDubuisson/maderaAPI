@@ -8,10 +8,10 @@ class Fournisseur{
     // object properties 
     public $idFournisseur; 
     public $libelleFournisseur; 
-    public $telFournisseur; 
 	public $rueFournisseur;
 	public $villeFournisseur; 
 	public $cpFournisseur;
+	public $telFournisseur; 
 	public $mailFournisseur; 
 	
     // constructor with $db as database connection 

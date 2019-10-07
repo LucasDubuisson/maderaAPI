@@ -3,7 +3,7 @@ class FamilleComposant{
   
     // database connection and table name 
     private $conn; 
-    private $table_name = "Famille_Composant"; 
+    private $table_name = "FamilleComposant"; 
   
     // object properties 
     public $idFamilleComposant; 

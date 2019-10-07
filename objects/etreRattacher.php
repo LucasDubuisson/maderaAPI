@@ -3,7 +3,7 @@ class EtreRattacher{
   
     // database connection and table name 
     private $conn; 
-    private $table_name = "Etre_Rattacher"; 
+    private $table_name = "EtreRattacher"; 
   
     // object properties 
     public $idClient; 

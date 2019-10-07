@@ -7,8 +7,9 @@ class Composant{
   
     // object properties 
     public $idComposant; 
-    public $libelleComposant; 
-    public $caractereComposant; 
+    public $libelleComposant;
+//caracteristiques	
+    public $caracterComposant; 
 	public $uniteUsageComposant;
 	public $idFamille_Composant;
 
