@@ -7,34 +7,28 @@ header('Content-Type: application/json');
 
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/praticien.php';
+include_once '../objects/user.php';
 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
 
 // prepare product object
-$UnPraticien = new Praticien($db);
+$UnUser = new User($db);
 
 // set ID property of product to be edited
-$UnPraticien->PRA_NUM = isset($_GET['id']) ? $_GET['id'] : die();
+$UnUser->idUser = isset($_GET['idUser']) ? $_GET['idUser'] : die();
 
 // read the details of product to be edited
-$UnPraticien->readOne();
+$UnUser->readOne();
 
 // create array
-$UnPraticien_arr = array(
-  "PRA_NUM" =>  $UnPraticien->PRA_NUM,
-  "PRA_NOM" => $UnPraticien->PRA_NOM,
-  "PRA_PRENOM" => $UnPraticien->PRA_PRENOM,
-  "PRA_ADRESSE" => $UnPraticien->PRA_ADRESSE,
-  "PRA_CP" => $UnPraticien->PRA_CP,
-  "PRA_VILLE" => $UnPraticien->PRA_VILLE,
-  "PRA_COEFNOTORIETE" => $UnPraticien->PRA_COEFNOTORIETE,
-  "TYP_CODE" => $UnPraticien->TYP_CODE
-
+$UnUser_arr = array(
+  "idUser" =>  $UnUser->idUser,
+  "nomUser" => $UnUser->nomUser,
+  "prenomUser" => $UnUser->prenomUser
 );
 
 // make it json format
-print_r(json_encode($UnPraticien_arr));
+print_r(json_encode($UnUser_arr));
 ?>

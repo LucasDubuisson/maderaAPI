@@ -22,13 +22,48 @@ class User{
     public function __construct($db){
         $this->conn = $db;
     }
-	
-	public function read(){
-      $query="SELECT idSite,nomUser,prenomUser,passwordUser,telUser,mailUser,villeUser,rueUser,cpUser,dateDeNaissanceUser,idService FROM user" //" + $table_name;
+	// read products
+	function read(){
+	 
+		// select all query
+		$query = "SELECT idSite,nomUser,prenomUser,passwordUser,telUser,mailUser,villeUser,rueUser,cpUser,dateDeNaissanceUser,idService
+				FROM " . $this->table_name;
+	 
+		// prepare query statement
+		$stmt = $this->conn->prepare($query);
+	 
+		// execute query
+		$stmt->execute();
+	 
+		return $stmt;
+	}
+	/*public function read(){
+      $query="SELECT * FROM user"; //. $table_name; //" idSite,nomUser,prenomUser,passwordUser,telUser,mailUser,villeUser,rueUser,cpUser,dateDeNaissanceUser,idService;
 
       $stmt = $this->conn->prepare($query);
       $stmt->execute();
 
       return $stmt;
     }
+	    public function readOne(){
+
+        // query to read single record
+        $query = "SELECT * FROM user WHERE idUser = ?";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->idUser);
+
+        // execute query
+        $stmt->execute();
+
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->nomUser = $row['nomUser'];
+        $this->prenomUser = $row['prenomUser'];
+    }*/
 }
