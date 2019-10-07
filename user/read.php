@@ -22,15 +22,17 @@ if($num>0){
     extract($row);
 
     $user_item=array(
-      "PRA_NUM" => $PRA_NUM,
-      "PRA_NOM" => $PRA_NOM,
-      "PRA_PRENOM" => $PRA_PRENOM,
-      "PRA_CP" => $PRA_CP,
-      "PRA_ADRESSE" => $PRA_ADRESSE,
-      "PRA_VILLE" => $PRA_VILLE,
-      "PRA_COEFNOTORIETE" => $PRA_COEFNOTORIETE,
-      "dep" => $dep,
-      "TYP_LIEU" => $TYP_LIEU
+      "idSite" => $idSite,
+      "nomUser" => $nomUser,
+      "prenomUser" => $prenomUser,
+      "passwordUser" => $passwordUser,
+      "telUser" => $telUser,
+      "mailUser" => $mailUser,
+      "villeUser" => $villeUser,
+      "rueUser" => $rueUser,
+	  "cpUser"=>$cpUser,
+	  "dateDeNaissanceUser"=>$dateDeNaissanceUser,
+      "idService" => $idService
     );
 
     array_push($user_arr["users"], $user_item);

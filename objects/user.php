@@ -24,7 +24,7 @@ class User{
     }
 	
 	public function read(){
-      $query="SELECT * FROM "+$table_name;
+      $query="SELECT idSite,nomUser,prenomUser,passwordUser,telUser,mailUser,villeUser,rueUser,cpUser,dateDeNaissanceUser,idService FROM user" //" + $table_name;
 
       $stmt = $this->conn->prepare($query);
       $stmt->execute();
