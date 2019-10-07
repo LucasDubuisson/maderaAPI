@@ -16,9 +16,19 @@ class User{
 	public $rueUser;
 	public $cpUser;
 	public $dateDeNaissanceUser;
+	public $idService;
 	
     // constructor with $db as database connection
     public function __construct($db){
         $this->conn = $db;
+    }
+	
+	public function read(){
+      $query="SELECT * FROM "+$table_name;
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute();
+
+      return $stmt;
     }
 }
