@@ -9,6 +9,8 @@ class Service{
     public $idService;
     public $libelleService;
     public $commentaireService;
+	public $idSite;
+	public $idDirection;
 	
     // constructor with $db as database connection
     public function __construct($db){
