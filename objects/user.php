@@ -8,6 +8,7 @@
     public $idUser;
     public $nomUser;
     public $prenomUser;
+	public $usernameUser;
     public $passwordUser;
     public $telUser;
     public $mailUser;
@@ -29,6 +30,7 @@
         idUser,
 		nomUser,
 		prenomUser,
+		usernameUser,
 		passwordUser,
 		telUser,
 		mailUser,
@@ -56,6 +58,7 @@
 		  idUser,
 		  nomUser,
 		  prenomUser,
+		  usernameUser,
 		  passwordUser,
 		  telUser,
 		  mailUser,
@@ -91,5 +94,54 @@
       $this->cpUser = $row['cpUser'];
       $this->dateDeNaissanceUser = $row['dateDeNaissanceUser'];
       $this->idService = $row['idService'];
+  }	
+    public function loginByUsernameAndPwd(){
+    // Create query
+    $query = 'SELECT
+		  idUser,
+		  nomUser,
+		  prenomUser
+        FROM
+          ' . $this->table . '
+      WHERE usernameUser = :userUserName AND passwordUser = :userPwd ';
+
+      //Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      // Bind ID
+      $stmt->bindParam(':userUserName', $this->usernameUser);
+	  $stmt->bindParam(':userPwd', $this->passwordUser);
+
+      // Execute query
+      $stmt->execute();
+
+      
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+	  
+	  // set properties
+      $this->idUser = $row['idUser'];
+      $this->nomUser = $row['nomUser'];
+      $this->prenomUser = $row['prenomUser'];
+    }	
+  public function findUserByUsername(){
+    // Create query
+    $query = 'SELECT
+		  idUser,
+		  nomUser,
+		  prenomUser
+        FROM
+          ' . $this->table . '
+      WHERE usernameUser = :userUserName';
+
+      //Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      // Bind ID
+      $stmt->bindParam(':userUserName', $this->usernameUser);
+
+      // Execute query
+      $stmt->execute();
+
+      return $stmt;  
   }	
 }

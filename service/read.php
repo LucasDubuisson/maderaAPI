@@ -1,42 +1,51 @@
-<?php
+<?php 
+  // Headers
+  header('Access-Control-Allow-Origin: *');
+  header('Content-Type: application/json');
 
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json; charset=UTF-8');
+  include_once '../config/database.php';
+  include_once '../objects/service.php';
 
-include_once '../config/database.php';
-include_once '../objects/service.php';
+  // Instantiate DB & connect
+  $database = new Database();
+  $db = $database->connect();
 
-$database = new Database();
-$db = $database->getConnection();
+  // Instantiate category object
+  $service = new Service($db);
 
-$service = new Service($db);
+  // Category read query
+  $result = $service->read();
+  
+  // Get row count
+  $num = $result->rowCount();
 
-$stmt = $service->read();
-//$num = $stmt->rowCount();
-echo $stmt;
-//if($num>0){
-  $service_arr=array();
-  $service_arr["services"]=array();
+  // Check if any categories
+  if($num > 0) {
+        // Cat array
+        $service_arr = array();
+        $service_arr['data'] = array();
 
-  while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-    extract($row);
+        while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+          extract($row);
 
-    $service_item=array(
-      "idService" => $idService,
-      "libelleService" => $libelleService,
-      "commentaireService" => $commentaireService,
-      "idSite" => $idSite,
-      "idDirection" => $idDirection
-    );
+          $service_item = array(
+            "idService" => $idService,
+            "libelleService" => $libelleService,
+            "commentaireService" => $commentaireService,
+            "idSite" => $idSite,
+            "idDirection" => $idDirection
+          );
 
-    array_push($service_arr["services"], $service_item);
+          // Push to "data"
+          array_push($service_arr['data'], $service_item);
+        }
+
+        // Turn to JSON & output
+        echo json_encode($service_arr);
+
+  } else {
+        // No Categories
+        echo json_encode(
+          array('message' => 'No Services Found')
+        );
   }
-
-  echo json_encode($service_arr);
-/*}
-else{
-  echo json_encode(
-    array("message" => "Aucun services trouvés.")
-  );
-}*/
-?>
