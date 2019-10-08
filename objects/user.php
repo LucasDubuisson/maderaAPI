@@ -1,11 +1,10 @@
 <?php
-class User{
- 
-    // database connection and table name
+  class User {
+    // DB Stuff
     private $conn;
-    private $table_name = "user";
- 
-    // object properties
+    private $table = 'User';
+
+    // Properties
     public $idUser;
     public $nomUser;
     public $prenomUser;
@@ -17,53 +16,80 @@ class User{
 	public $cpUser;
 	public $dateDeNaissanceUser;
 	public $idService;
-	
-    // constructor with $db as database connection
-    public function __construct($db){
-        $this->conn = $db;
-    }
-	// read products
-	function read(){
-	 
-		// select all query
-		$query = "SELECT idSite,nomUser,prenomUser,passwordUser,telUser,mailUser,villeUser,rueUser,cpUser,dateDeNaissanceUser,idService
-				FROM " . $this->table_name;
-	 
-		// prepare query statement
-		$stmt = $this->conn->prepare($query);
-	 
-		// execute query
-		$stmt->execute();
-	 
-		return $stmt;
-	}
-	/*public function read(){
-      $query="SELECT * FROM user"; //. $table_name; //" idSite,nomUser,prenomUser,passwordUser,telUser,mailUser,villeUser,rueUser,cpUser,dateDeNaissanceUser,idService;
 
+    // Constructor with DB
+    public function __construct($db) {
+      $this->conn = $db;
+    }
+
+    // Get categories
+    public function read() {
+      // Create query
+      $query = 'SELECT
+        idUser,
+		nomUser,
+		prenomUser,
+		passwordUser,
+		telUser,
+		mailUser,
+		villeUser,
+		rueUser,
+		cpUser,
+		dateDeNaissanceUser,
+		idService
+      FROM
+        ' . $this->table . '
+      ORDER BY
+        idUser ASC';
+
+      // Prepare statement
       $stmt = $this->conn->prepare($query);
+
+      // Execute query
       $stmt->execute();
 
       return $stmt;
     }
-	    public function readOne(){
+	  public function read_one(){
+    // Create query
+    $query = 'SELECT
+		  idUser,
+		  nomUser,
+		  prenomUser,
+		  passwordUser,
+		  telUser,
+		  mailUser,
+		  villeUser,
+		  rueUser,
+		  cpUser,
+		  dateDeNaissanceUser,
+		  idService
+        FROM
+          ' . $this->table . '
+      WHERE idUser = :userID ';
 
-        // query to read single record
-        $query = "SELECT * FROM user WHERE idUser = ?";
+      //Prepare statement
+      $stmt = $this->conn->prepare($query);
 
-        // prepare query statement
-        $stmt = $this->conn->prepare($query);
+      // Bind ID
+      $stmt->bindParam(':userID', $this->idUser);
 
-        // bind id of product to be updated
-        $stmt->bindParam(1, $this->idUser);
+      // Execute query
+      $stmt->execute();
 
-        // execute query
-        $stmt->execute();
-
-        // get retrieved row
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // set values to object properties
-        $this->nomUser = $row['nomUser'];
-        $this->prenomUser = $row['prenomUser'];
-    }*/
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+	  
+	  // set properties
+      //$this->idUser = $row['idUser'];
+      $this->nomUser = $row['nomUser'];
+      $this->prenomUser = $row['prenomUser'];
+      $this->passwordUser = $row['passwordUser'];
+      $this->telUser = $row['telUser'];
+      $this->mailUser = $row['mailUser'];
+      $this->rueUser = $row['rueUser'];
+      $this->villeUser = $row['villeUser'];
+      $this->cpUser = $row['cpUser'];
+      $this->dateDeNaissanceUser = $row['dateDeNaissanceUser'];
+      $this->idService = $row['idService'];
+  }	
 }

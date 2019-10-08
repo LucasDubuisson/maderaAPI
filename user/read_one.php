@@ -1,34 +1,38 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: GET");
-header("Access-Control-Allow-Credentials: true");
-header('Content-Type: application/json');
 
-// include database and object files
-include_once '../config/database.php';
-include_once '../objects/user.php';
+  // Headers
+  header('Access-Control-Allow-Origin: *');
+  header('Content-Type: application/json');
 
-// get database connection
-$database = new Database();
-$db = $database->getConnection();
+  include_once '../config/database.php';
+  include_once '../objects/user.php';
+  
+  // Instantiate DB & connect
+  $database = new Database();
+  $db = $database->connect();
+  // Instantiate blog category object
+  $utilisateur = new User($db);
 
-// prepare product object
-$UnUser = new User($db);
+  // Get ID
+  $utilisateur->idUser = isset($_GET['userId']) ? $_GET['userId'] : die();
 
-// set ID property of product to be edited
-$UnUser->idUser = isset($_GET['idUser']) ? $_GET['idUser'] : die();
+  // Get post
+  $utilisateur->read_one();
 
-// read the details of product to be edited
-$UnUser->readOne();
+  // Create array
+  $user_arr = array(
+    	"idUser" => $utilisateur->idUser,
+		"nomUser" => $utilisateur->nomUser,
+		"prenomUser" => $utilisateur->prenomUser,
+		"passwordUser" => $utilisateur->passwordUser,
+		"telUser" => $utilisateur->telUser,
+		"mailUser" => $utilisateur->mailUser,
+		"villeUser" => $utilisateur->villeUser,
+		"rueUser" => $utilisateur->rueUser,
+		"cpUser"=>$utilisateur->cpUser,
+		"dateDeNaissanceUser"=>$utilisateur->dateDeNaissanceUser,
+		"idService" => $utilisateur->idService
+  );
 
-// create array
-$UnUser_arr = array(
-  "idUser" =>  $UnUser->idUser,
-  "nomUser" => $UnUser->nomUser,
-  "prenomUser" => $UnUser->prenomUser
-);
-
-// make it json format
-print_r(json_encode($UnUser_arr));
-?>
+  // Make JSON
+  print_r(json_encode($user_arr));
