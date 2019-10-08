@@ -6,29 +6,29 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/paiement.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog paiement object
+  $paiement = new Paiement($db);
 
-  // Get raw serviceed data
+  // Get raw paiemented data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
-  $service->idService = $data->idService;
+  $paiement->idPaiement = $data->idPaiement;
 
-  // Delete service
-  if($service->delete()) {
+  // Delete paiement
+  if($paiement->delete()) {
     echo json_encode(
-      array('message' => 'service Deleted')
+      array('message' => 'paiement Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Deleted')
+      array('message' => 'paiement Not Deleted')
     );
   }
 

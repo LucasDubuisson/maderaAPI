@@ -8,7 +8,7 @@ class Composant{
     // object properties 
     public $idComposant; 
     public $libelleComposant;
-//caracteristiques	
+	//caracteristiques	
     public $caracterComposant; 
 	public $uniteUsageComposant;
 	public $idFamille_Composant;
@@ -17,4 +17,157 @@ class Composant{
     public function __construct($db){ 
         $this->conn = $db; 
     } 
+		
+    public function read() {
+      // Create query
+      $query = 'SELECT
+			idComposant,
+			libelleComposant,
+			caracterComposant, 
+			uniteUsageComposant,
+			idFamille_Composant 
+		FROM 
+        ' . $this->table_name;
+
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      // Execute query
+      $stmt->execute();
+
+      return $stmt;
+    }
+
+  public function read_one(){
+    // Create query
+    $query = 'SELECT
+			libelleComposant,
+			caracterComposant, 
+			uniteUsageComposant,
+			idFamille_Composant 
+        FROM
+          ' . $this->table_name . '
+      WHERE idComposant = :composantId';
+
+      //Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      // Bind ID
+      $stmt->bindParam(':composantId', $this->idComposant);
+
+      // Execute query
+      $stmt->execute();
+
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      // set properties
+      $this->idComposant = $row['idComposant'];
+      $this->libelleComposant = $row['libelleComposant'];
+	  $this->caracterComposant = $row['caracterComposant'];
+      $this->uniteUsageComposant = $row['uniteUsageComposant'];
+	  $this->idFamille_Composant = $row['idFamille_Composant'];
+  }
+
+  // Create Category
+  public function create() {
+    // Create Query
+    $query = 'INSERT INTO ' .
+      $this->table_name . '
+    SET
+		libelleComposant= :composantLibelle,
+		caracterComposant= :composantCaracter, 
+		uniteUsageComposant= :composantUniteUsage,
+		idFamille_Composant= :composantFamilleId';
+
+  // Prepare Statement
+  $stmt = $this->conn->prepare($query);
+
+  // Clean data
+  $this->libelleComposant = htmlspecialchars(strip_tags($this->libelleComposant));
+  $this->caracterComposant = htmlspecialchars(strip_tags($this->caracterComposant));
+  $this->uniteUsageComposant = htmlspecialchars(strip_tags($this->uniteUsageComposant));
+  $this->idFamille_Composant = htmlspecialchars(strip_tags($this->idFamille_Composant));
+  
+  // Bind data
+  $stmt-> bindParam(':composantLibelle', $this->libelleComposant);
+  $stmt-> bindParam(':composantCaracter', $this->caracterComposant);
+  $stmt-> bindParam(':composantUniteUsage', $this->uniteUsageComposant);
+  $stmt-> bindParam(':composantFamilleId', $this->idFamille_Composant);
+  
+  // Execute query
+  if($stmt->execute()) {
+    return true;
+  }
+
+  // Print error if something goes wrong
+  printf("Error: $s.\n", $stmt->error);
+
+  return false;
+  }
+
+  // Update Category
+  public function update() {
+    // Create Query
+    $query = 'UPDATE ' .
+      $this->table_name . '
+    SET
+		libelleComposant= :composantLibelle,
+		caracterComposant= :composantCaracter, 
+		uniteUsageComposant= :composantUniteUsage,
+		idFamille_Composant= :composantFamilleId
+    WHERE idComposant = :composantId';
+
+  // Prepare Statement
+  $stmt = $this->conn->prepare($query);
+
+  // Clean data
+  $this->libelleComposant = htmlspecialchars(strip_tags($this->libelleComposant));
+  $this->caracterComposant = htmlspecialchars(strip_tags($this->caracterComposant));
+  $this->uniteUsageComposant = htmlspecialchars(strip_tags($this->uniteUsageComposant));
+  $this->idFamille_Composant = htmlspecialchars(strip_tags($this->idFamille_Composant));
+  $this->idComposant = htmlspecialchars(strip_tags($this->idComposant));
+  
+  // Bind data
+  $stmt-> bindParam(':composantLibelle', $this->libelleComposant);
+  $stmt-> bindParam(':composantCaracter', $this->caracterComposant);
+  $stmt-> bindParam(':composantUniteUsage', $this->uniteUsageComposant);
+  $stmt-> bindParam(':composantFamilleId', $this->idFamille_Composant);
+  $stmt-> bindParam(':composantId', $this->idComposant);
+  
+  // Execute query
+  if($stmt->execute()) {
+    return true;
+  }
+
+  // Print error if something goes wrong
+  printf("Error: $s.\n", $stmt->error);
+
+  return false;
+  }
+
+  // Delete 
+  public function delete() {
+    // Create query
+    $query = 'DELETE FROM ' . $this->table_name . ' WHERE idComposant = :composantId';
+
+    // Prepare Statement
+    $stmt = $this->conn->prepare($query);
+
+    // clean data
+    $this->idComposant = htmlspecialchars(strip_tags($this->idComposant));
+
+    // Bind Data
+    $stmt-> bindParam(':composantId', $this->idComposant);
+
+    // Execute query
+    if($stmt->execute()) {
+      return true;
+    }
+
+    // Print error if something goes wrong
+    printf("Error: $s.\n", $stmt->error);
+
+    return false;
+   }
+	
 }

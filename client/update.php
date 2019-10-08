@@ -6,34 +6,38 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/client.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate blog service object
-  $service = new Service($db);
+  $client = new Client($db);
 
   // Get raw serviceed data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
  
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
-  $service->idService = $data->idService;
+  $client->nomClient = $data->nomClient;
+  $client->prenomClient = $data->prenomClient;
+  $client->societeClient = $data->societeClient;
+  $client->villeClient = $data->villeClient;
+  $client->rueClient = $data->rueClient;
+  $client->cpClient = $data->cpClient;
+  $client->telClient = $data->telClient;
+  $client->mailClient = $data->mailClient;
+  $client->idClient = $data->idClient;
 
   // Update service
-  if($service->update()) {
+  if($client->update()) {
     echo json_encode(
-      array('message' => 'service Updated')
+      array('message' => 'client Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Updated')
+      array('message' => 'client Not Updated')
     );
   }
 

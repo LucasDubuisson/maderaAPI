@@ -6,34 +6,32 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/direction.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate blog service object
-  $service = new Service($db);
+  $direction = new Direction($db);
 
   // Get raw serviceed data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
  
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
-  $service->idService = $data->idService;
+  $direction->libelleDirection = $data->libelleDirection;
+  $direction->idDirection = $data->idDirection;
+
 
   // Update service
-  if($service->update()) {
+  if($direction->update()) {
     echo json_encode(
-      array('message' => 'service Updated')
+      array('message' => 'direction Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Updated')
+      array('message' => 'direction Not Updated')
     );
   }
 

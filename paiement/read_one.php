@@ -5,28 +5,36 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/paiement.php';
   
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
   // Instantiate blog category object
-  $service = new Service($db);
+  $paiement = new Paiement($db);
 
   // Get ID
-  $service->idService = isset($_GET['serviceId']) ? $_GET['serviceId'] : die();
+  $paiement->idPaiement = isset($_GET['paiementId']) ? $_GET['paiementId'] : die();
 
   // Get post
-  $service->read_one();
+  $paiement->read_one();
 
   // Create array
-  $service_arr = array(
-      "idService" => $service->idService,
-      "libelleService" => $service->libelleService,
-      "commentaireService" => $service->commentaireService,
-      "idSite" => $service->idSite,
-      "idDirection" => $service->idDirection
+  $paiement_arr = array(
+            "idPaiement" => $paiement->idPaiement,
+            "signaturePaiement" => $paiement->signaturePaiement,
+            "permisConstruirePaiement" => $paiement->permisConstruirePaiement,
+            "OuvertureChantierPaiement" => $paiement->OuvertureChantierPaiement,
+            "achevementFondationPaiement" => $paiement->achevementFondationPaiement,
+			"achevementMurPaiement" => $paiement->achevementMurPaiement,
+            "misHorsDeauPaiement" => $paiement->misHorsDeauPaiement,
+            "achevementTravauxPaiement" => $paiement->achevementTravauxPaiement,
+			"remiseClePaiement" => $paiement->remiseClePaiement,
+			"statutPaiement" => $paiement->statutPaiement,
+            "dateDernierPaiement" => $paiement->dateDernierPaiement,
+            "idCommande" => $paiement->idCommande
+
   );
 
   // Make JSON
-  print_r(json_encode($service_arr));
+  print_r(json_encode($paiement_arr));

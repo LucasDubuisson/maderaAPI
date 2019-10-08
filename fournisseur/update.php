@@ -6,34 +6,35 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/fournisseur.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog fournisseur object
+  $fournisseur = new Fournisseur($db);
 
-  // Get raw serviceed data
+  // Get raw fournisseured data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
- 
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
-  $service->idService = $data->idService;
+  $fournisseur->libelleFournisseur = $data->libelleFournisseur;
+  $fournisseur->rueFournisseur = $data->rueFournisseur;
+  $fournisseur->villeFournisseur = $data->villeFournisseur;
+  $fournisseur->cpFournisseur = $data->cpFournisseur;
+  $fournisseur->telFournisseur = $data->telFournisseur;
+  $fournisseur->mailFournisseur = $data->mailFournisseur;
+  $fournisseur->idFournisseur = $data->idFournisseur;
 
-  // Update service
-  if($service->update()) {
+  // Update fournisseur
+  if($fournisseur->update()) {
     echo json_encode(
-      array('message' => 'service Updated')
+      array('message' => 'fournisseur Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Updated')
+      array('message' => 'fournisseur Not Updated')
     );
   }
 

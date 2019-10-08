@@ -4,17 +4,17 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/maison.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate category object
-  $service = new Service($db);
+  $maison = new Maison($db);
 
   // Category read query
-  $result = $service->read();
+  $result = $maison->read();
   
   // Get row count
   $num = $result->rowCount();
@@ -22,30 +22,29 @@
   // Check if any categories
   if($num > 0) {
         // Cat array
-        $service_arr = array();
-        $service_arr['data'] = array();
+        $maison_arr = array();
+        $maison_arr['data'] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
           extract($row);
 
-          $service_item = array(
-            "idService" => $idService,
-            "libelleService" => $libelleService,
-            "commentaireService" => $commentaireService,
-            "idSite" => $idSite,
-            "idDirection" => $idDirection
+          $maison_item = array(
+			  "idMaison" => $maison->idMaison,
+			  "libelleMaison" => $maison->libelleMaison,
+			  "dateCreationMaison" => $maison->dateCreationMaison,
+			  "createdByUserIdMaison" => $maison->createdByUserIdMaison
           );
 
           // Push to "data"
-          array_push($service_arr['data'], $service_item);
+          array_push($maison_arr['data'], $maison_item);
         }
 
         // Turn to JSON & output
-        echo json_encode($service_arr);
+        echo json_encode($maison_arr);
 
   } else {
         // No Categories
         echo json_encode(
-          array('message' => 'No Services Found')
+          array('message' => 'No Maisons Found')
         );
   }

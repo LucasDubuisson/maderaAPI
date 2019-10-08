@@ -6,34 +6,31 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/familleComposant.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog familleComposant object
+  $familleComposant = new FamilleComposant($db);
 
-  // Get raw serviceed data
+  // Get raw familleComposanted data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
  
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
-  $service->idService = $data->idService;
+  $familleComposant->libelleFamilleComposant = $data->libelleFamilleComposant;
+  $familleComposant->idFamilleComposant = $data->idFamilleComposant;
 
-  // Update service
-  if($service->update()) {
+  // Update familleComposant
+  if($familleComposant->update()) {
     echo json_encode(
-      array('message' => 'service Updated')
+      array('message' => 'familleComposant Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Updated')
+      array('message' => 'familleComposant Not Updated')
     );
   }
 

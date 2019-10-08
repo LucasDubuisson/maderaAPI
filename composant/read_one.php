@@ -5,28 +5,28 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/composant.php';
   
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
   // Instantiate blog category object
-  $service = new Service($db);
+  $composant = new Composant($db);
 
   // Get ID
-  $service->idService = isset($_GET['serviceId']) ? $_GET['serviceId'] : die();
+  $composant->idComposant = isset($_GET['composantId']) ? $_GET['composantId'] : die();
 
   // Get post
-  $service->read_one();
+  $composant->read_one();
 
   // Create array
-  $service_arr = array(
-      "idService" => $service->idService,
-      "libelleService" => $service->libelleService,
-      "commentaireService" => $service->commentaireService,
-      "idSite" => $service->idSite,
-      "idDirection" => $service->idDirection
+  $composant_arr = array(
+		"idComposant" => $idComposant,
+		"libelleComposant" => $libelleComposant,
+		"caracterComposant" => $caracterComposant,
+		"uniteUsageComposant" => $uniteUsageComposant,
+		"idFamille_Composant" => $idFamille_Composant
   );
 
   // Make JSON
-  print_r(json_encode($service_arr));
+  print_r(json_encode($composant_arr));

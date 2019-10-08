@@ -5,28 +5,32 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/module.php';
   
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
   // Instantiate blog category object
-  $service = new Service($db);
+  $module = new Module($db);
 
   // Get ID
-  $service->idService = isset($_GET['serviceId']) ? $_GET['serviceId'] : die();
+  $module->idModule = isset($_GET['moduleId']) ? $_GET['moduleId'] : die();
 
   // Get post
-  $service->read_one();
+  $module->read_one();
 
   // Create array
-  $service_arr = array(
-      "idService" => $service->idService,
-      "libelleService" => $service->libelleService,
-      "commentaireService" => $service->commentaireService,
-      "idSite" => $service->idSite,
-      "idDirection" => $service->idDirection
+  $module_arr = array(
+      "idModule" => $module->idModule,
+      "libelleModule" => $module->libelleModule,
+      "natureModule" => $module->natureModule,
+      "uniteUsageModule" => $module->uniteUsageModule,
+      "moduleFinition" => $module->moduleFinition,
+	  "typeIsolantModule" => $module->typeIsolantModule,
+      "typeCouvertureModule" => $module->typeCouvertureModule,
+      "huisseriesModule" => $module->huisseriesModule,
+      "idRegleCalcul" => $module->idRegleCalcul
   );
 
   // Make JSON
-  print_r(json_encode($service_arr));
+  print_r(json_encode($module_arr));

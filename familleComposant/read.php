@@ -4,17 +4,17 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/familleComposant.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate category object
-  $service = new Service($db);
+  $familleComposant = new FamilleComposant($db);
 
   // Category read query
-  $result = $service->read();
+  $result = $familleComposant->read();
   
   // Get row count
   $num = $result->rowCount();
@@ -22,30 +22,27 @@
   // Check if any categories
   if($num > 0) {
         // Cat array
-        $service_arr = array();
-        $service_arr['data'] = array();
+        $familleComposant_arr = array();
+        $familleComposant_arr['data'] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
           extract($row);
 
-          $service_item = array(
-            "idService" => $idService,
-            "libelleService" => $libelleService,
-            "commentaireService" => $commentaireService,
-            "idSite" => $idSite,
-            "idDirection" => $idDirection
+          $familleComposant_item = array(
+            "idFamilleComposant" => $idFamilleComposant,
+            "libelleFamilleComposant" => $libelleFamilleComposant
           );
 
           // Push to "data"
-          array_push($service_arr['data'], $service_item);
+          array_push($familleComposant_arr['data'], $familleComposant_item);
         }
 
         // Turn to JSON & output
-        echo json_encode($service_arr);
+        echo json_encode($familleComposant_arr);
 
   } else {
         // No Categories
         echo json_encode(
-          array('message' => 'No Services Found')
+          array('message' => 'No FamilleComposants Found')
         );
   }

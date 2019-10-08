@@ -6,31 +6,37 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/paiement.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog paiement object
+  $paiement = new Paiement($db);
 
-  // Get raw serviceed data
+  // Get raw paiemented data
   $data = json_decode(file_get_contents("php://input"));
+  
+  $paiement->signaturePaiement = $data->signaturePaiement;
+  $paiement->permisConstruirePaiement = $data->permisConstruirePaiement;
+  $paiement->OuvertureChantierPaiement = $data->OuvertureChantierPaiement;
+  $paiement->achevementFondationPaiement = $data->achevementFondationPaiement;
+  $paiement->achevementMurPaiement = $data->achevementMurPaiement;
+  $paiement->misHorsDeauPaiement = $data->misHorsDeauPaiement;
+  $paiement->achevementTravauxPaiement = $data->achevementTravauxPaiement;
+  $paiement->remiseClePaiement = $data->remiseClePaiement;
+  $paiement->statutPaiement = $data->statutPaiement;
+  $paiement->idCommande = $data->idCommande;
 
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
-
-  // Create service
-  if($service->create()) {
+  // Create paiement
+  if($paiement->create()) {
     echo json_encode(
-      array('message' => 'service Created')
+      array('message' => 'paiement Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Created')
+      array('message' => 'paiement Not Created')
     );
   }
 

@@ -4,17 +4,17 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/paiement.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate category object
-  $service = new Service($db);
+  $paiement = new Paiement($db);
 
   // Category read query
-  $result = $service->read();
+  $result = $paiement->read();
   
   // Get row count
   $num = $result->rowCount();
@@ -22,30 +22,37 @@
   // Check if any categories
   if($num > 0) {
         // Cat array
-        $service_arr = array();
-        $service_arr['data'] = array();
+        $paiement_arr = array();
+        $paiement_arr['data'] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
           extract($row);
 
-          $service_item = array(
-            "idService" => $idService,
-            "libelleService" => $libelleService,
-            "commentaireService" => $commentaireService,
-            "idSite" => $idSite,
-            "idDirection" => $idDirection
+          $paiement_item = array(
+            "idPaiement" => $idPaiement,
+            "signaturePaiement" => $signaturePaiement,
+            "permisConstruirePaiement" => $permisConstruirePaiement,
+            "OuvertureChantierPaiement" => $OuvertureChantierPaiement,
+            "achevementFondationPaiement" => $achevementFondationPaiement,
+			"achevementMurPaiement" => $achevementMurPaiement,
+            "misHorsDeauPaiement" => $misHorsDeauPaiement,
+            "achevementTravauxPaiement" => $achevementTravauxPaiement,
+			"remiseClePaiement" => $remiseClePaiement,
+			"statutPaiement" => $statutPaiement,
+            "dateDernierPaiement" => $dateDernierPaiement,
+            "idCommande" => $idCommande
           );
 
           // Push to "data"
-          array_push($service_arr['data'], $service_item);
+          array_push($paiement_arr['data'], $paiement_item);
         }
 
         // Turn to JSON & output
-        echo json_encode($service_arr);
+        echo json_encode($paiement_arr);
 
   } else {
         // No Categories
         echo json_encode(
-          array('message' => 'No Services Found')
+          array('message' => 'No Paiements Found')
         );
   }

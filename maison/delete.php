@@ -6,29 +6,29 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/maison.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog maison object
+  $maison = new Maison($db);
 
-  // Get raw serviceed data
+  // Get raw maisoned data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
-  $service->idService = $data->idService;
+  $maison->idMaison = $data->idMaison;
 
-  // Delete service
-  if($service->delete()) {
+  // Delete maison
+  if($maison->delete()) {
     echo json_encode(
-      array('message' => 'service Deleted')
+      array('message' => 'maison Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Deleted')
+      array('message' => 'maison Not Deleted')
     );
   }
 

@@ -6,29 +6,29 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/dossierTechnique.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog dossier object
+  $dossier = new Dossier($db);
 
-  // Get raw serviceed data
+  // Get raw dossiered data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
-  $service->idService = $data->idService;
+  $dossier->idDossier = $data->idDossier;
 
-  // Delete service
-  if($service->delete()) {
+  // Delete dossier
+  if($dossier->delete()) {
     echo json_encode(
-      array('message' => 'service Deleted')
+      array('message' => 'dossier Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Deleted')
+      array('message' => 'dossier Not Deleted')
     );
   }
 

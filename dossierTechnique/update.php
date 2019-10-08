@@ -6,34 +6,33 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/dossierTechnique.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog dossier object
+  $dossier = new Dossier($db);
 
-  // Get raw serviceed data
+  // Get raw dossiered data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
  
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
-  $service->idService = $data->idService;
+  $dossier->libelleDossier = $data->libelleDossier;
+  $dossier->resumeEnML = $data->resumeEnML;
+  $dossier->idDevis = $data->idDevis;
+  $dossier->idDossier = $data->idDossier;
 
-  // Update service
-  if($service->update()) {
+  // Update dossier
+  if($dossier->update()) {
     echo json_encode(
-      array('message' => 'service Updated')
+      array('message' => 'dossier Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Updated')
+      array('message' => 'dossier Not Updated')
     );
   }
 

@@ -5,28 +5,27 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/dossierTechnique.php';
   
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
   // Instantiate blog category object
-  $service = new Service($db);
+  $dossier = new Dossier($db);
 
   // Get ID
-  $service->idService = isset($_GET['serviceId']) ? $_GET['serviceId'] : die();
+  $dossier->idDossier = isset($_GET['dossierId']) ? $_GET['dossierId'] : die();
 
   // Get post
-  $service->read_one();
+  $dossier->read_one();
 
   // Create array
-  $service_arr = array(
-      "idService" => $service->idService,
-      "libelleService" => $service->libelleService,
-      "commentaireService" => $service->commentaireService,
-      "idSite" => $service->idSite,
-      "idDirection" => $service->idDirection
+  $dossier_arr = array(
+      "idDossier" => $dossier->idDossier,
+      "libelleDossier" => $dossier->libelleDossier,
+      "resumeEnML" => $dossier->resumeEnML,
+      "idDevis" => $dossier->idDevis
   );
 
   // Make JSON
-  print_r(json_encode($service_arr));
+  print_r(json_encode($dossier_arr));

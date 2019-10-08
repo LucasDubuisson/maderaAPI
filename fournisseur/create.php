@@ -6,31 +6,33 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/fournisseur.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog fournisseur object
+  $fournisseur = new Fournisseur($db);
 
-  // Get raw serviceed data
+  // Get raw fournisseured data
   $data = json_decode(file_get_contents("php://input"));
 
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
+  $fournisseur->libelleFournisseur = $data->libelleFournisseur;
+  $fournisseur->rueFournisseur = $data->rueFournisseur;
+  $fournisseur->villeFournisseur = $data->villeFournisseur;
+  $fournisseur->cpFournisseur = $data->cpFournisseur;
+  $fournisseur->telFournisseur = $data->telFournisseur;
+  $fournisseur->mailFournisseur = $data->mailFournisseur;
 
-  // Create service
-  if($service->create()) {
+  // Create fournisseur
+  if($fournisseur->create()) {
     echo json_encode(
-      array('message' => 'service Created')
+      array('message' => 'fournisseur Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Created')
+      array('message' => 'fournisseur Not Created')
     );
   }
 

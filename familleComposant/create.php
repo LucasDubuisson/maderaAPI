@@ -6,31 +6,28 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/familleComposant.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog familleComposant object
+  $familleComposant = new FamilleComposant($db);
 
-  // Get raw serviceed data
+  // Get raw familleComposanted data
   $data = json_decode(file_get_contents("php://input"));
 
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
+  $familleComposant->libelleFamilleComposant = $data->libelleFamilleComposant;
 
-  // Create service
-  if($service->create()) {
+  // Create familleComposant
+  if($familleComposant->create()) {
     echo json_encode(
-      array('message' => 'service Created')
+      array('message' => 'familleComposant Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Created')
+      array('message' => 'familleComposant Not Created')
     );
   }
 

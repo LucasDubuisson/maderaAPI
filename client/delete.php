@@ -6,23 +6,23 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/client.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate blog service object
-  $service = new Service($db);
+  $client = new Client($db);
 
   // Get raw serviceed data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
-  $service->idService = $data->idService;
+  $client->idClient = $data->idClient;
 
   // Delete service
-  if($service->delete()) {
+  if($client->delete()) {
     echo json_encode(
       array('message' => 'service Deleted')
     );

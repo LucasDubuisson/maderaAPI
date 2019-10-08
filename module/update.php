@@ -6,34 +6,38 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/module.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog module object
+  $module = new Module($db);
 
-  // Get raw serviceed data
+  // Get raw moduleed data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
- 
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
-  $service->idService = $data->idService;
+  $module->libelleModule = $data->libelleModule;
+  $module->natureModule = $data->natureModule;
+  $module->caractModule = $data->caractModule;
+  $module->uniteUsageModule = $data->uniteUsageModule;
+  $module->finitionModule = $data->finitionModule;
+  $module->typeIsolantModule = $data->typeIsolantModule;
+  $module->typeCouvertureModule = $data->typeCouvertureModule;
+  $module->huisseriesModule = $data->huisseriesModule;
+  $module->idRegleCalcul = $data->idRegleCalcul;
+  $module->idModule = $data->idModule;
 
-  // Update service
-  if($service->update()) {
+  // Update module
+  if($module->update()) {
     echo json_encode(
-      array('message' => 'service Updated')
+      array('message' => 'module Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Updated')
+      array('message' => 'module Not Updated')
     );
   }
 

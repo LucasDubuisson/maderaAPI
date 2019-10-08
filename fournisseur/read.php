@@ -4,17 +4,17 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/fournisseur.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate category object
-  $service = new Service($db);
+  $fournisseur = new Fournisseur($db);
 
   // Category read query
-  $result = $service->read();
+  $result = $fournisseur->read();
   
   // Get row count
   $num = $result->rowCount();
@@ -22,30 +22,32 @@
   // Check if any categories
   if($num > 0) {
         // Cat array
-        $service_arr = array();
-        $service_arr['data'] = array();
+        $fournisseur_arr = array();
+        $fournisseur_arr['data'] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
           extract($row);
 
-          $service_item = array(
-            "idService" => $idService,
-            "libelleService" => $libelleService,
-            "commentaireService" => $commentaireService,
-            "idSite" => $idSite,
-            "idDirection" => $idDirection
+          $fournisseur_item = array(
+            "idFournisseur" => $idFournisseur,
+            "libelleFournisseur" => $libelleFournisseur,
+            "rueFournisseur" => $rueFournisseur,
+            "villeFournisseur" => $villeFournisseur,
+			"cpFournisseur" => $cpFournisseur,
+            "telFournisseur" => $telFournisseur,
+            "mailFournisseur" => $mailFournisseur
           );
 
           // Push to "data"
-          array_push($service_arr['data'], $service_item);
+          array_push($fournisseur_arr['data'], $fournisseur_item);
         }
 
         // Turn to JSON & output
-        echo json_encode($service_arr);
+        echo json_encode($fournisseur_arr);
 
   } else {
         // No Categories
         echo json_encode(
-          array('message' => 'No Services Found')
+          array('message' => 'No Fournisseurs Found')
         );
   }

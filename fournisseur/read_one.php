@@ -5,28 +5,30 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/fournisseur.php';
   
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
   // Instantiate blog category object
-  $service = new Service($db);
+  $fournisseur = new Fournisseur($db);
 
   // Get ID
-  $service->idService = isset($_GET['serviceId']) ? $_GET['serviceId'] : die();
+  $fournisseur->idFournisseur = isset($_GET['fournisseurId']) ? $_GET['fournisseurId'] : die();
 
   // Get post
-  $service->read_one();
+  $fournisseur->read_one();
 
   // Create array
-  $service_arr = array(
-      "idService" => $service->idService,
-      "libelleService" => $service->libelleService,
-      "commentaireService" => $service->commentaireService,
-      "idSite" => $service->idSite,
-      "idDirection" => $service->idDirection
+  $fournisseur_arr = array(
+			"idFournisseur" => $fournisseur->idFournisseur,
+            "libelleFournisseur" => $fournisseur->libelleFournisseur,
+            "rueFournisseur" => $fournisseur->rueFournisseur,
+            "villeFournisseur" => $fournisseur->villeFournisseur,
+			"cpFournisseur" => $fournisseur->cpFournisseur,
+            "telFournisseur" => $fournisseur->telFournisseur,
+            "mailFournisseur" => $fournisseur->mailFournisseur
   );
 
   // Make JSON
-  print_r(json_encode($service_arr));
+  print_r(json_encode($fournisseur_arr));

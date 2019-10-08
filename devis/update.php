@@ -6,34 +6,36 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/devis.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog devis object
+  $devis = new Devis($db);
 
-  // Get raw serviceed data
+  // Get raw devised data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
- 
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
-  $service->idService = $data->idService;
+  $devis->prixDevis = $data->prixDevis;
+  $devis->etatDevis = $data->etatDevis;
+  $devis->dateDevis = $data->dateDevis;
+  $devis->dateEvolutionDevis = $data->dateEvolutionDevis;
+  $devis->avancementDevisByUserId = $data->avancementDevisByUserId;
+  $devis->idDossier = $data->idDossier;
+  $devis->idMaison = $data->idMaison;
+  $devis->idDevis = $data->idDevis;
 
-  // Update service
-  if($service->update()) {
+  // Update devis
+  if($devis->update()) {
     echo json_encode(
-      array('message' => 'service Updated')
+      array('message' => 'devis Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Updated')
+      array('message' => 'devis Not Updated')
     );
   }
 
