@@ -21,11 +21,11 @@
 
   // Create array
   $composant_arr = array(
-		"idComposant" => $idComposant,
-		"libelleComposant" => $libelleComposant,
-		"caracterComposant" => $caracterComposant,
-		"uniteUsageComposant" => $uniteUsageComposant,
-		"idFamille_Composant" => $idFamille_Composant
+		"idComposant" => $composant->idComposant,
+		"libelleComposant" => $composant->libelleComposant,
+		"caracterComposant" => $composant->caracterComposant,
+		"uniteUsageComposant" => $composant->uniteUsageComposant,
+		"idFamilleComposant" => $composant->idFamilleComposant
   );
 
   // Make JSON

@@ -33,7 +33,7 @@
             "libelleComposant" => $libelleComposant,
             "caracterComposant" => $caracterComposant,
             "uniteUsageComposant" => $uniteUsageComposant,
-            "idFamille_Composant" => $idFamille_Composant
+            "idFamilleComposant" => $idFamilleComposant
           );
 
           // Push to "data"

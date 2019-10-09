@@ -24,7 +24,7 @@
   $composant->libelleComposant = $data->libelleComposant;
   $composant->caracterComposant = $data->caracterComposant;
   $composant->uniteUsageComposant = $data->uniteUsageComposant;
-  $composant->idFamille_Composant = $data->idFamille_Composant;
+  $composant->idFamilleComposant = $data->idFamilleComposant;
   
 
   // Update service

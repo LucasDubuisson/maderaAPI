@@ -11,7 +11,7 @@ class Composant{
 	//caracteristiques	
     public $caracterComposant; 
 	public $uniteUsageComposant;
-	public $idFamille_Composant;
+	public $idFamilleComposant;
 
     // constructor with $db as database connection 
     public function __construct($db){ 
@@ -25,7 +25,7 @@ class Composant{
 			libelleComposant,
 			caracterComposant, 
 			uniteUsageComposant,
-			idFamille_Composant 
+			idFamilleComposant 
 		FROM 
         ' . $this->table_name;
 
@@ -41,10 +41,11 @@ class Composant{
   public function read_one(){
     // Create query
     $query = 'SELECT
+    		idComposant,
 			libelleComposant,
 			caracterComposant, 
 			uniteUsageComposant,
-			idFamille_Composant 
+			idFamilleComposant 
         FROM
           ' . $this->table_name . '
       WHERE idComposant = :composantId';
@@ -65,7 +66,7 @@ class Composant{
       $this->libelleComposant = $row['libelleComposant'];
 	  $this->caracterComposant = $row['caracterComposant'];
       $this->uniteUsageComposant = $row['uniteUsageComposant'];
-	  $this->idFamille_Composant = $row['idFamille_Composant'];
+	  $this->idFamilleComposant = $row['idFamilleComposant'];
   }
 
   // Create Category
@@ -77,7 +78,7 @@ class Composant{
 		libelleComposant= :composantLibelle,
 		caracterComposant= :composantCaracter, 
 		uniteUsageComposant= :composantUniteUsage,
-		idFamille_Composant= :composantFamilleId';
+		idFamilleComposant= :composantFamilleId';
 
   // Prepare Statement
   $stmt = $this->conn->prepare($query);
@@ -86,13 +87,13 @@ class Composant{
   $this->libelleComposant = htmlspecialchars(strip_tags($this->libelleComposant));
   $this->caracterComposant = htmlspecialchars(strip_tags($this->caracterComposant));
   $this->uniteUsageComposant = htmlspecialchars(strip_tags($this->uniteUsageComposant));
-  $this->idFamille_Composant = htmlspecialchars(strip_tags($this->idFamille_Composant));
+  $this->idFamilleComposant = htmlspecialchars(strip_tags($this->idFamilleComposant));
   
   // Bind data
   $stmt-> bindParam(':composantLibelle', $this->libelleComposant);
   $stmt-> bindParam(':composantCaracter', $this->caracterComposant);
   $stmt-> bindParam(':composantUniteUsage', $this->uniteUsageComposant);
-  $stmt-> bindParam(':composantFamilleId', $this->idFamille_Composant);
+  $stmt-> bindParam(':composantFamilleId', $this->idFamilleComposant);
   
   // Execute query
   if($stmt->execute()) {
@@ -114,7 +115,7 @@ class Composant{
 		libelleComposant= :composantLibelle,
 		caracterComposant= :composantCaracter, 
 		uniteUsageComposant= :composantUniteUsage,
-		idFamille_Composant= :composantFamilleId
+		idFamilleComposant= :composantFamilleId
     WHERE idComposant = :composantId';
 
   // Prepare Statement
@@ -124,14 +125,14 @@ class Composant{
   $this->libelleComposant = htmlspecialchars(strip_tags($this->libelleComposant));
   $this->caracterComposant = htmlspecialchars(strip_tags($this->caracterComposant));
   $this->uniteUsageComposant = htmlspecialchars(strip_tags($this->uniteUsageComposant));
-  $this->idFamille_Composant = htmlspecialchars(strip_tags($this->idFamille_Composant));
+  $this->idFamilleComposant = htmlspecialchars(strip_tags($this->idFamilleComposant));
   $this->idComposant = htmlspecialchars(strip_tags($this->idComposant));
   
   // Bind data
   $stmt-> bindParam(':composantLibelle', $this->libelleComposant);
   $stmt-> bindParam(':composantCaracter', $this->caracterComposant);
   $stmt-> bindParam(':composantUniteUsage', $this->uniteUsageComposant);
-  $stmt-> bindParam(':composantFamilleId', $this->idFamille_Composant);
+  $stmt-> bindParam(':composantFamilleId', $this->idFamilleComposant);
   $stmt-> bindParam(':composantId', $this->idComposant);
   
   // Execute query
