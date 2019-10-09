@@ -6,29 +6,29 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/regleCalcul.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog regleCalcul object
+  $regleCalcul = new RegleCalcul($db);
 
-  // Get raw serviceed data
+  // Get raw regleCalculed data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
-  $service->idService = $data->idService;
+  $regleCalcul->idRegleCalcul = $data->idRegleCalcul;
 
   // Delete service
-  if($service->delete()) {
+  if($regleCalcul->delete()) {
     echo json_encode(
-      array('message' => 'service Deleted')
+      array('message' => 'regleCalcul Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Deleted')
+      array('message' => 'regleCalcul Not Deleted')
     );
   }
 

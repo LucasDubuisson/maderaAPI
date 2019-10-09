@@ -6,31 +6,32 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/stocker.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog stocker object
+  $stocker = new Stocker($db);
 
-  // Get raw serviceed data
+  // Get raw stockered data
   $data = json_decode(file_get_contents("php://input"));
 
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
+  $stocker->idSite = $data->idSite;
+  $stocker->idProductionSite = $data->idProductionSite;
+  $stocker->idComposant = $data->idComposant;
+  $stocker->quantite = $data->quantite;
+  $stocker->lastUpdateUserId = $data->lastUpdateUserId;
 
-  // Create service
-  if($service->create()) {
+  // Create stocker
+  if($stocker->create()) {
     echo json_encode(
-      array('message' => 'service Created')
+      array('message' => 'stocker Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Created')
+      array('message' => 'stocker Not Created')
     );
   }
 

@@ -6,31 +6,36 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/site.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog site object
+  $site = new Site($db);
 
-  // Get raw serviceed data
+  // Get raw siteed data
   $data = json_decode(file_get_contents("php://input"));
 
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
+  $site->libelleSite = $data->libelleSite;
+  $site->villeSite = $data->villeSite;
+  $site->rueSite = $data->rueSite;
+  $site->cpSite = $data->cpSite;
+  $site->mailSite = $data->mailSite;
+  $site->telSite = $data->telSite;
+  $site->activiteSite = $data->activiteSite;
+  $site->entrepotSite = $data->entrepotSite;
+  $site->locauxSite = $data->locauxSite;
 
-  // Create service
-  if($service->create()) {
+  // Create site
+  if($site->create()) {
     echo json_encode(
-      array('message' => 'service Created')
+      array('message' => 'site Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Created')
+      array('message' => 'site Not Created')
     );
   }
 

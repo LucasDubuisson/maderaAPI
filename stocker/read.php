@@ -4,17 +4,17 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/stocker.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate category object
-  $service = new Service($db);
+  $stocker = new Stocker($db);
 
   // Category read query
-  $result = $service->read();
+  $result = $stocker->read();
   
   // Get row count
   $num = $result->rowCount();
@@ -22,30 +22,30 @@
   // Check if any categories
   if($num > 0) {
         // Cat array
-        $service_arr = array();
-        $service_arr['data'] = array();
+        $stocker_arr = array();
+        $stocker_arr['data'] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
           extract($row);
 
-          $service_item = array(
-            "idService" => $idService,
-            "libelleService" => $libelleService,
-            "commentaireService" => $commentaireService,
+          $stocker_item = array(
             "idSite" => $idSite,
-            "idDirection" => $idDirection
+            "idProductionSite" => $idProductionSite,
+            "idComposant" => $idComposant,
+            "quantite" => $quantite,
+            "lastUpdateUserId" => $lastUpdateUserId
           );
 
           // Push to "data"
-          array_push($service_arr['data'], $service_item);
+          array_push($stocker_arr['data'], $stocker_item);
         }
 
         // Turn to JSON & output
-        echo json_encode($service_arr);
+        echo json_encode($stocker_arr);
 
   } else {
         // No Categories
         echo json_encode(
-          array('message' => 'No Services Found')
+          array('message' => 'No Stockers Found')
         );
   }

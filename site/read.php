@@ -4,17 +4,17 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/site.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate category object
-  $service = new Service($db);
+  $site = new Site($db);
 
   // Category read query
-  $result = $service->read();
+  $result = $site->read();
   
   // Get row count
   $num = $result->rowCount();
@@ -22,30 +22,35 @@
   // Check if any categories
   if($num > 0) {
         // Cat array
-        $service_arr = array();
-        $service_arr['data'] = array();
+        $site_arr = array();
+        $site_arr['data'] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
           extract($row);
-
-          $service_item = array(
-            "idService" => $idService,
-            "libelleService" => $libelleService,
-            "commentaireService" => $commentaireService,
+          
+          $site_item = array(
             "idSite" => $idSite,
-            "idDirection" => $idDirection
+            "libelleSite" => $libelleSite,
+            "villeSite" => $villeSite,
+            "rueSite" => $rueSite,
+            "cpSite" => $cpSite,
+            "mailSite" => $mailSite,
+            "telSite" => $telSite,
+            "activiteSite" => $activiteSite,
+            "entrepotSite" => $entrepotSite,
+            "locauxSite" => $locauxSite
           );
 
           // Push to "data"
-          array_push($service_arr['data'], $service_item);
+          array_push($site_arr['data'], $site_item);
         }
 
         // Turn to JSON & output
-        echo json_encode($service_arr);
+        echo json_encode($site_arr);
 
   } else {
         // No Categories
         echo json_encode(
-          array('message' => 'No Services Found')
+          array('message' => 'No Sites Found')
         );
   }

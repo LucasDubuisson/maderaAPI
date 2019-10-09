@@ -5,28 +5,26 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/regleCalcul.php';
   
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
   // Instantiate blog category object
-  $service = new Service($db);
+  $regleCalcul = new RegleCalcul($db);
 
   // Get ID
-  $service->idService = isset($_GET['serviceId']) ? $_GET['serviceId'] : die();
+  $regleCalcul->idRegleCalcul = isset($_GET['regleCalculId']) ? $_GET['regleCalculId'] : die();
 
   // Get post
-  $service->read_one();
+  $regleCalcul->read_one();
 
   // Create array
-  $service_arr = array(
-      "idService" => $service->idService,
-      "libelleService" => $service->libelleService,
-      "commentaireService" => $service->commentaireService,
-      "idSite" => $service->idSite,
-      "idDirection" => $service->idDirection
+  $regleCalcul_arr = array(
+            "idRegleCalcul" => $idRegleCalcul,
+            "ennonceRegleCalcul" => $ennonceRegleCalcul,
+            "regleRegleCalcul" => $regleRegleCalcul
   );
 
   // Make JSON
-  print_r(json_encode($service_arr));
+  print_r(json_encode($regleCalcul_arr));

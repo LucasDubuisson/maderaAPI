@@ -5,28 +5,30 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/stocker.php';
   
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
   // Instantiate blog category object
-  $service = new Service($db);
+  $stocker = new Stocker($db);
 
   // Get ID
-  $service->idService = isset($_GET['serviceId']) ? $_GET['serviceId'] : die();
+  $stocker->idStocker = isset($_GET['siteId']) ? $_GET['siteId'] : die();
+  $stocker->idStocker = isset($_GET['productionsiteId']) ? $_GET['productionsiteId'] : die();
+  $stocker->idStocker = isset($_GET['composantId']) ? $_GET['composantId'] : die();
 
   // Get post
-  $service->read_one();
+  $stocker->read_one();
 
   // Create array
-  $service_arr = array(
-      "idService" => $service->idService,
-      "libelleService" => $service->libelleService,
-      "commentaireService" => $service->commentaireService,
-      "idSite" => $service->idSite,
-      "idDirection" => $service->idDirection
+  $stocker_arr = array(
+      "idSite" => $stocker->idSite,
+      "idProductionSite" => $stocker->idProductionSite,
+      "idComposant" => $stocker->idComposant,
+      "quantite" => $stocker->quantite,
+      "lastUpdateUserId" => $stocker->lastUpdateUserId
   );
 
   // Make JSON
-  print_r(json_encode($service_arr));
+  print_r(json_encode($stocker_arr));

@@ -5,28 +5,34 @@
   header('Content-Type: application/json');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/site.php';
   
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
   // Instantiate blog category object
-  $service = new Service($db);
+  $site = new Site($db);
 
   // Get ID
-  $service->idService = isset($_GET['serviceId']) ? $_GET['serviceId'] : die();
+  $site->idSite = isset($_GET['siteId']) ? $_GET['siteId'] : die();
 
   // Get post
-  $service->read_one();
+  $site->read_one();
 
   // Create array
-  $service_arr = array(
-      "idService" => $service->idService,
-      "libelleService" => $service->libelleService,
-      "commentaireService" => $service->commentaireService,
-      "idSite" => $service->idSite,
-      "idDirection" => $service->idDirection
+  $site_arr = array(
+            "idSite" => $site->idSite,
+            "libelleSite" => $site->libelleSite,
+            "villeSite" => $site->villeSite,
+            "rueSite" => $site->rueSite,
+            "cpSite" => $site->cpSite,
+            "mailSite" => $site->mailSite,
+            "telSite" => $site->telSite,
+            "activiteSite" => $site->activiteSite,
+            "entrepotSite" => $site->entrepotSite,
+            "locauxSite" => $site->locauxSite
+     
   );
 
   // Make JSON
-  print_r(json_encode($service_arr));
+  print_r(json_encode($site_arr));

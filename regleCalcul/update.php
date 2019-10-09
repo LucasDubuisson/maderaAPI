@@ -6,34 +6,32 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/regleCalcul.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog regleCalcul object
+  $regleCalcul = new regleCalcul($db);
 
   // Get raw serviceed data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
  
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
-  $service->idService = $data->idService;
+  $regleCalcul->ennonceRegleCalcul = $data->ennonceRegleCalcul;
+  $regleCalcul->regleRegleCalcul = $data->regleRegleCalcul;
+  $regleCalcul->idRegleCalcul = $data->idRegleCalcul;
 
-  // Update service
-  if($service->update()) {
+  // Update regleCalcul
+  if($regleCalcul->update()) {
     echo json_encode(
-      array('message' => 'service Updated')
+      array('message' => 'regleCalcul Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Updated')
+      array('message' => 'regleCalcul Not Updated')
     );
   }
 

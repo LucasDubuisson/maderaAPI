@@ -6,34 +6,40 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../config/database.php';
-  include_once '../objects/service.php';
+  include_once '../objects/site.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog service object
-  $service = new Service($db);
+  // Instantiate blog site object
+  $site = new Site($db);
 
-  // Get raw serviceed data
+  // Get raw siteed data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
- 
-  $service->libelleService = $data->libelleService;
-  $service->commentaireService = $data->commentaireService;
-  $service->idSite = $data->idSite;
-  $service->idDirection = $data->idDirection;
-  $service->idService = $data->idService;
 
-  // Update service
-  if($service->update()) {
+  $site->libelleSite = $data->libelleSite;
+  $site->villeSite = $data->villeSite;
+  $site->rueSite = $data->rueSite;
+  $site->cpSite = $data->cpSite;
+  $site->mailSite = $data->mailSite;
+  $site->telSite = $data->telSite;
+  $site->activiteSite = $data->activiteSite;
+  $site->entrepotSite = $data->entrepotSite;
+  $site->locauxSite = $data->locauxSite;
+
+  $site->idSite = $data->idSite;
+
+  // Update site
+  if($site->update()) {
     echo json_encode(
-      array('message' => 'service Updated')
+      array('message' => 'site Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'service Not Updated')
+      array('message' => 'site Not Updated')
     );
   }
 
