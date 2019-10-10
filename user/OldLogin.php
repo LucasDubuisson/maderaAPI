@@ -31,12 +31,7 @@
   );
 
   // Make JSON
-     // set response code - 404 Not found
-    http_response_code(200);
- 
-    // tell the user no products found
-    echo json_encode($utilisateur_arr);
-  //print_r(json_encode($utilisateur_arr));
+  print_r(json_encode($utilisateur_arr));
 	//$message='Bonjour '.$utilisateur->nomUser.' '.$utilisateur->prenomUser.' ('.$utilisateur->idUser.')';
   } 
   else 
@@ -49,23 +44,12 @@
 	  $num = $result->rowCount();
 
 	  if($num > 0) {
-		   // set response code - 404 Not found
-          http_response_code(401);
-
-          // tell the user no products found
-          echo json_encode(
-              array("message" => "Mot de passe incorrect")
-          );
+		$message='Mot de passe incorrect';
 	  }
 	  else
 	  {		 
-      		http_response_code(404);
-
-          	// tell the user no products found
-          	echo json_encode(
-              	array("message" => "Username incorrect ou inexistant")
-          	);
+		$message='Username incorrect ou inexistant';
 	  }
-      
+      print_r(json_encode(array('Connexion' => $message)));
   }
  

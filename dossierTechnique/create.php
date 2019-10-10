@@ -23,10 +23,12 @@
   $dossier->idDevis = $data->idDevis;
   // Create dossier
   if($dossier->create()) {
+	      http_response_code(200);
     echo json_encode(
       array('message' => 'dossier Created')
     );
   } else {
+	      http_response_code(404);
     echo json_encode(
       array('message' => 'dossier Not Created')
     );

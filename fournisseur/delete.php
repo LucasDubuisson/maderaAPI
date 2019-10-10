@@ -23,10 +23,12 @@
 
   // Delete fournisseur
   if($fournisseur->delete()) {
+	      http_response_code(200);
     echo json_encode(
       array('message' => 'fournisseur Deleted')
     );
   } else {
+	      http_response_code(404);
     echo json_encode(
       array('message' => 'fournisseur Not Deleted')
     );

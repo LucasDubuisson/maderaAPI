@@ -23,10 +23,12 @@
 
   // Delete site
   if($site->delete()) {
+	  http_response_code(200);
     echo json_encode(
       array('message' => 'site Deleted')
     );
   } else {
+	  http_response_code(404);
     echo json_encode(
       array('message' => 'site Not Deleted')
     );

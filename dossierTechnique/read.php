@@ -38,11 +38,12 @@
           // Push to "data"
           array_push($dossier_arr['data'], $dossier_item);
         }
-
+    http_response_code(200);
         // Turn to JSON & output
         echo json_encode($dossier_arr);
 
   } else {
+	      http_response_code(404);
         // No Categories
         echo json_encode(
           array('message' => 'No Dossiers Found')

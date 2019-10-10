@@ -26,10 +26,12 @@
 
   // Update regleCalcul
   if($regleCalcul->update()) {
+	      http_response_code(200);
     echo json_encode(
       array('message' => 'regleCalcul Updated')
     );
   } else {
+	      http_response_code(404);
     echo json_encode(
       array('message' => 'regleCalcul Not Updated')
     );

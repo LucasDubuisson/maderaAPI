@@ -23,10 +23,12 @@
 
   // Delete service
   if($composant->delete()) {
+	    http_response_code(200);
     echo json_encode(
       array('message' => 'composant Deleted')
     );
   } else {
+	    http_response_code(404);
     echo json_encode(
       array('message' => 'composant Not Deleted')
     );

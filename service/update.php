@@ -28,10 +28,12 @@
 
   // Update service
   if($service->update()) {
+	  http_response_code(200);
     echo json_encode(
       array('message' => 'service Updated')
     );
   } else {
+	  http_response_code(404);
     echo json_encode(
       array('message' => 'service Not Updated')
     );

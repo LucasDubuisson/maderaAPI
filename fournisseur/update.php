@@ -29,10 +29,12 @@
 
   // Update fournisseur
   if($fournisseur->update()) {
+	      http_response_code(200);
     echo json_encode(
       array('message' => 'fournisseur Updated')
     );
   } else {
+	      http_response_code(404);
     echo json_encode(
       array('message' => 'fournisseur Not Updated')
     );

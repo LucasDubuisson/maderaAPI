@@ -25,10 +25,12 @@
 
   // Create service
   if($service->create()) {
+	  http_response_code(200);
     echo json_encode(
       array('message' => 'service Created')
     );
   } else {
+	  http_response_code(404);
     echo json_encode(
       array('message' => 'service Not Created')
     );

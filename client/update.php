@@ -32,10 +32,12 @@
 
   // Update service
   if($client->update()) {
+	   http_response_code(200);
     echo json_encode(
       array('message' => 'client Updated')
     );
   } else {
+	   http_response_code(404);
     echo json_encode(
       array('message' => 'client Not Updated')
     );

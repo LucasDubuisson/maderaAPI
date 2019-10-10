@@ -30,10 +30,12 @@
 
   // Create module
   if($module->create()) {
+	      http_response_code(200);
     echo json_encode(
       array('message' => 'module Created')
     );
   } else {
+	      http_response_code(404);
     echo json_encode(
       array('message' => 'module Not Created')
     );

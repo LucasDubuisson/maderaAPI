@@ -46,11 +46,12 @@
           // Push to "data"
           array_push($paiement_arr['data'], $paiement_item);
         }
-
+		    http_response_code(200);
         // Turn to JSON & output
         echo json_encode($paiement_arr);
 
   } else {
+	      http_response_code(404);
         // No Categories
         echo json_encode(
           array('message' => 'No Paiements Found')

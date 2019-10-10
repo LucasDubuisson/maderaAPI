@@ -29,10 +29,12 @@
 
   // Update service
   if($commande->update()) {
+	   http_response_code(200);
     echo json_encode(
       array('message' => 'commande Updated')
     );
   } else {
+	   http_response_code(404);
     echo json_encode(
       array('message' => 'commande Not Updated')
     );

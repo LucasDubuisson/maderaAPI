@@ -28,10 +28,12 @@
 
   // Create service
   if($commande->create()) {
+	    http_response_code(200);
     echo json_encode(
       array('message' => 'commande Created')
     );
   } else {
+	    http_response_code(404);
     echo json_encode(
       array('message' => 'commande Not Created')
     );

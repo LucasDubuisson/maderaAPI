@@ -42,11 +42,12 @@
           // Push to "data"
           array_push($devis_arr['data'], $devis_item);
         }
-
+		  http_response_code(200);
         // Turn to JSON & output
         echo json_encode($devis_arr);
 
   } else {
+	    http_response_code(404);
         // No Categories
         echo json_encode(
           array('message' => 'No Devis Found')

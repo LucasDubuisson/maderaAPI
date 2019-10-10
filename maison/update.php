@@ -27,10 +27,12 @@
 
   // Update maison
   if($maison->update()) {
+	      http_response_code(200);
     echo json_encode(
       array('message' => 'maison Updated')
     );
   } else {
+	      http_response_code(404);
     echo json_encode(
       array('message' => 'maison Not Updated')
     );

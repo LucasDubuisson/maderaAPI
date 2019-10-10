@@ -23,10 +23,12 @@
 
   // Delete service
   if($direction->delete()) {
+	    http_response_code(200);
     echo json_encode(
       array('message' => 'Direction Deleted')
     );
   } else {
+	    http_response_code(404);
     echo json_encode(
       array('message' => 'Direction Not Deleted')
     );

@@ -32,10 +32,12 @@
 
   // Update module
   if($module->update()) {
+	      http_response_code(200);
     echo json_encode(
       array('message' => 'module Updated')
     );
   } else {
+	      http_response_code(404);
     echo json_encode(
       array('message' => 'module Not Updated')
     );

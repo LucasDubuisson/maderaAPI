@@ -41,11 +41,12 @@
           // Push to "data"
           array_push($fournisseur_arr['data'], $fournisseur_item);
         }
-
+		    http_response_code(200);
         // Turn to JSON & output
         echo json_encode($fournisseur_arr);
 
   } else {
+	      http_response_code(404);
         // No Categories
         echo json_encode(
           array('message' => 'No Fournisseurs Found')

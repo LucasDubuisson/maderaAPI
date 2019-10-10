@@ -36,11 +36,12 @@
           // Push to "data"
           array_push($familleComposant_arr['data'], $familleComposant_item);
         }
-
+    http_response_code(200);
         // Turn to JSON & output
         echo json_encode($familleComposant_arr);
 
   } else {
+	      http_response_code(404);
         // No Categories
         echo json_encode(
           array('message' => 'No FamilleComposants Found')

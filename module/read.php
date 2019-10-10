@@ -43,11 +43,12 @@
           // Push to "data"
           array_push($module_arr['data'], $module_item);
         }
-
+    http_response_code(200);
         // Turn to JSON & output
         echo json_encode($module_arr);
 
   } else {
+	      http_response_code(404);
         // No Categories
         echo json_encode(
           array('message' => 'No Modules Found')

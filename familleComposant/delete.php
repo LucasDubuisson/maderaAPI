@@ -23,10 +23,12 @@
 
   // Delete familleComposant
   if($familleComposant->delete()) {
+	      http_response_code(200);
     echo json_encode(
       array('message' => 'familleComposant Deleted')
     );
   } else {
+	      http_response_code(404);
     echo json_encode(
       array('message' => 'familleComposant Not Deleted')
     );

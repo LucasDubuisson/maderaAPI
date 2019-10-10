@@ -7,7 +7,7 @@ class Stocker{
  
     // object properties
     public $idSite;
-    public $idProductionSite;
+    public $idProduction;
     public $idComposant;
 	public $quantite;
 	public $lastUpdateUserId;
@@ -20,7 +20,7 @@ class Stocker{
         // Create query
         $query = 'SELECT
                 idSite,
-                idProductionSite,
+                idProduction,
                 idComposant,
                 quantite,
                 lastUpdateUserId
@@ -40,14 +40,14 @@ class Stocker{
       // Create query
       $query = 'SELECT
                 idSite,
-                idProductionSite,
+                idProduction,
                 idComposant,
                 quantite,
                 lastUpdateUserId
           FROM
             ' . $this->table_name . '
         WHERE idSite = :siteId 
-        AND idProductionSite = :productionsiteId 
+        AND idProduction = :productionsiteId 
         AND idComposant = :composantId ';
   
         //Prepare statement
@@ -55,7 +55,7 @@ class Stocker{
   
         // Bind ID
         $stmt->bindParam(':siteId', $this->idSite);
-        $stmt->bindParam(':productionsiteId', $this->idProductionSite);
+        $stmt->bindParam(':productionsiteId', $this->idProduction);
         $stmt->bindParam(':composantId', $this->idComposant);
   
         // Execute query
@@ -65,10 +65,36 @@ class Stocker{
   
         // set properties
         $this->idSite = $row['idSite'];
-        $this->idProductionSite = $row['idProductionSite'];
+        $this->idProduction = $row['idProduction'];
         $this->idComposant = $row['idComposant'];
         $this->quantite = $row['quantite'];
         $this->lastUpdateUserId = $row['lastUpdateUserId'];
+    }
+	public function readStockComposantBySite(){
+      // Create query
+      $query = 'SELECT
+                quantite
+          FROM
+            STOCKER
+        WHERE idSite = :siteId 
+        AND idProduction = :productionsiteId 
+        AND idComposant = :composantId ';
+  
+        //Prepare statement
+        $stmt = $this->conn->prepare($query);
+  
+        // Bind ID
+        $stmt->bindParam(':siteId', $this->idSite);
+        $stmt->bindParam(':productionsiteId', $this->idProduction);
+        $stmt->bindParam(':composantId', $this->idComposant);
+  
+        // Execute query
+        $stmt->execute();
+  
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  
+        // set properties
+        $this->quantite = $row['quantite'];
     }
   
     // Create Category
@@ -78,7 +104,7 @@ class Stocker{
         $this->table_name . '
       SET
             idSite = :siteId , 
-            idProductionSite = :productionsiteId ,
+            idProduction = :productionsiteId ,
             idComposant = :composantId ,
             quantite = :quantite ,
             lastUpdateUserId = :lastUpdateUserId ';
@@ -88,14 +114,14 @@ class Stocker{
   
     // Clean data
     $this->idSite = htmlspecialchars(strip_tags($this->idSite));
-    $this->idProductionSite = htmlspecialchars(strip_tags($this->idProductionSite));
+    $this->idProduction = htmlspecialchars(strip_tags($this->idProduction));
     $this->idComposant = htmlspecialchars(strip_tags($this->idComposant));
     $this->quantite = htmlspecialchars(strip_tags($this->quantite));
     $this->lastUpdateUserId = htmlspecialchars(strip_tags($this->lastUpdateUserId));
 
     // Bind data
     $stmt-> bindParam(':siteId', $this->idSite);
-    $stmt-> bindParam(':productionsiteId', $this->idProductionSite);
+    $stmt-> bindParam(':productionsiteId', $this->idProduction);
     $stmt-> bindParam(':composantId', $this->idComposant);
     $stmt-> bindParam(':quantite', $this->quantite);
     $stmt-> bindParam(':lastUpdateUserId', $this->lastUpdateUserId);
@@ -120,7 +146,7 @@ class Stocker{
       quantite = :quantite ,
       lastUpdateUserId = :lastUpdateUserId 
     WHERE idStocker = :stockerId 
-        AND idProductionSite = :productionsiteId
+        AND idProduction = :productionsiteId
         AND idComposant = :composantId';
   
     // Prepare Statement
@@ -130,14 +156,14 @@ class Stocker{
     $this->quantite = htmlspecialchars(strip_tags($this->quantite));
     $this->lastUpdateUserId = htmlspecialchars(strip_tags($this->lastUpdateUserId));
     $this->idSite = htmlspecialchars(strip_tags($this->idSite));
-    $this->idProductionSite = htmlspecialchars(strip_tags($this->idProductionSite));
+    $this->idProduction = htmlspecialchars(strip_tags($this->idProduction));
     $this->idComposant = htmlspecialchars(strip_tags($this->idComposant));
 
     // Bind data
     $stmt-> bindParam(':quantite', $this->quantite);
     $stmt-> bindParam(':lastUpdateUserId', $this->lastUpdateUserId);
     $stmt-> bindParam(':siteId', $this->idSite);
-    $stmt-> bindParam(':productionsiteId', $this->idProductionSite);
+    $stmt-> bindParam(':productionsiteId', $this->idProduction);
     $stmt-> bindParam(':composantId', $this->idComposant);
 
     // Execute query
@@ -154,19 +180,19 @@ class Stocker{
     // Delete 
     public function delete() {
       // Create query
-      $query = 'DELETE FROM ' . $this->table_name . ' WHERE idStocker = :stockerId AND idProductionSite = :productionsiteId AND idComposant = :composantId';
+      $query = 'DELETE FROM ' . $this->table_name . ' WHERE idSite = :siteId AND idProduction = :productionId AND idComposant = :composantId';
   
       // Prepare Statement
       $stmt = $this->conn->prepare($query);
   
       // clean data
       $this->idSite = htmlspecialchars(strip_tags($this->idSite));
-      $this->idProductionSite = htmlspecialchars(strip_tags($this->idProductionSite));
+      $this->idProduction = htmlspecialchars(strip_tags($this->idProduction));
       $this->idComposant = htmlspecialchars(strip_tags($this->idComposant));
   
       // Bind Data
       $stmt-> bindParam(':siteId', $this->idSite);
-      $stmt-> bindParam(':productionsiteId', $this->idProductionSite);
+      $stmt-> bindParam(':productionId', $this->idProduction);
       $stmt-> bindParam(':composantId', $this->idComposant);
   
       // Execute query

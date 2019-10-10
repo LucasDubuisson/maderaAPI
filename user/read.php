@@ -45,11 +45,12 @@
           // Push to "data"
           array_push($user_arr['data'], $user_item);
         }
-
+		http_response_code(200);
         // Turn to JSON & output
         echo json_encode($user_arr);
 
   } else {
+	  http_response_code(404);
         // No Categories
         echo json_encode(
           array('message' => 'No Users Found')

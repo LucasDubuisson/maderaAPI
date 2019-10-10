@@ -41,11 +41,12 @@
           // Push to "data"
           array_push($commande_arr['data'], $commande_item);
         }
-
+		 http_response_code(200);
         // Turn to JSON & output
         echo json_encode($commande_arr);
 
   } else {
+	   http_response_code(404);
         // No Categories
         echo json_encode(
           array('message' => 'No Services Found')

@@ -30,7 +30,7 @@
 
           $stocker_item = array(
             "idSite" => $idSite,
-            "idProductionSite" => $idProductionSite,
+            "idProduction" => $idProduction,
             "idComposant" => $idComposant,
             "quantite" => $quantite,
             "lastUpdateUserId" => $lastUpdateUserId
@@ -39,11 +39,12 @@
           // Push to "data"
           array_push($stocker_arr['data'], $stocker_item);
         }
-
+		http_response_code(200);
         // Turn to JSON & output
         echo json_encode($stocker_arr);
 
   } else {
+	  http_response_code(404);
         // No Categories
         echo json_encode(
           array('message' => 'No Stockers Found')
