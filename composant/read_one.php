@@ -32,7 +32,7 @@
 
   // Get post
   $composant->read_one();
-  
+ 
   $stockerLille->idComposant=$composant->idComposant;
   $stockerLille->readStockComposantBySite();
   $stockerDax->idComposant=$composant->idComposant;
@@ -40,7 +40,7 @@
   $stockerAnnecy->idComposant=$composant->idComposant;
   $stockerAnnecy->readStockComposantBySite();
   
-  
+  if($composant->libelleComposant!=null){ 
   // Create array
   $composant_arr = array(
 		"idComposant" => $composant->idComposant,
@@ -50,7 +50,6 @@
 		"quantite" => array("Lille" =>$stockerLille->quantite,"Dax" =>$stockerDax->quantite,"Annecy" =>$stockerAnnecy->quantite),
 		"idFamilleComposant" => $composant->idFamilleComposant
   );
-
   // Make JSON
   http_response_code(200);
   print_r(json_encode($composant_arr));

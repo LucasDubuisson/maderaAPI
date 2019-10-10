@@ -56,6 +56,7 @@
             "caracterComposant" => $caracterComposant,
             "uniteUsageComposant" => $uniteUsageComposant,
 			"quantite" => array("Lille" =>$stockerLille->quantite,"Dax" =>$stockerDax->quantite,"Annecy" =>$stockerAnnecy->quantite),
+            "modifier"=>"http://localhost:8100/stock-detail/".$idComposant,
             "idFamilleComposant" => $idFamilleComposant
           );
 
