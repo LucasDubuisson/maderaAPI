@@ -9,7 +9,6 @@ class Dossier{
     public $idDossier; 
     public $libelleDossier; 
 	public $resumeEnML; 
-    public $idDevis; 
 
 	
     // constructor with $db as database connection 
@@ -23,8 +22,7 @@ class Dossier{
       $query = 'SELECT
 			idDossier, 
 			libelleDossier,
-			resumeEnML, 
-			idDevis 
+			resumeEnML
 		FROM 
         ' . $this->table_name;
 
@@ -42,8 +40,7 @@ class Dossier{
     $query = 'SELECT
 			idDossier, 
 			libelleDossier,
-			resumeEnML, 
-			idDevis 
+			resumeEnML
         FROM
           ' . $this->table_name . '
       WHERE idDossier = :dossierId ';
@@ -63,7 +60,6 @@ class Dossier{
       $this->idDossier = $row['idDossier'];
       $this->libelleDossier = $row['libelleDossier'];
 	  $this->resumeEnML = $row['resumeEnML'];
-      $this->idDevis = $row['idDevis'];
   }
 
   // Create Category
@@ -73,8 +69,7 @@ class Dossier{
       $this->table_name . '
     SET
       libelleDossier = :dossierLibelle,
-	  resumeEnML= :dossierResumeEnML,
-	  idDevis= :devisId';
+	  resumeEnML= :dossierResumeEnML';
 
   // Prepare Statement
   $stmt = $this->conn->prepare($query);
@@ -82,13 +77,9 @@ class Dossier{
   // Clean data
   $this->libelleDossier = htmlspecialchars(strip_tags($this->libelleDossier));
   $this->resumeEnML = htmlspecialchars(strip_tags($this->resumeEnML));
-  $this->idDevis = htmlspecialchars(strip_tags($this->idDevis));
-  
   // Bind data
   $stmt-> bindParam(':dossierLibelle', $this->libelleDossier);
   $stmt-> bindParam(':dossierResumeEnML', $this->resumeEnML);
-  $stmt-> bindParam(':devisId', $this->idDevis);
-  
   // Execute query
   if($stmt->execute()) {
     return true;
@@ -107,8 +98,7 @@ class Dossier{
       $this->table_name . '
     SET
       libelleDossier = :dossierLibelle,
-	  resumeEnML= :dossierResumeEnML,
-	  idDevis= :devisId
+	  resumeEnML= :dossierResumeEnML
       WHERE idDossier = :dossierId';
 
   // Prepare Statement
@@ -117,13 +107,11 @@ class Dossier{
   // Clean data
   $this->libelleDossier = htmlspecialchars(strip_tags($this->libelleDossier));
   $this->resumeEnML = htmlspecialchars(strip_tags($this->resumeEnML));
-  $this->idDevis = htmlspecialchars(strip_tags($this->idDevis));
   $this->idDossier = htmlspecialchars(strip_tags($this->idDossier));
 
   // Bind data
   $stmt-> bindParam(':dossierLibelle', $this->libelleDossier);
   $stmt-> bindParam(':dossierResumeEnML', $this->resumeEnML);
-  $stmt-> bindParam(':devisId', $this->idDevis);
   $stmt-> bindParam(':dossierId', $this->idDossier);
   
   // Execute query

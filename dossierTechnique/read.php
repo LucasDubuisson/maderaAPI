@@ -31,8 +31,7 @@
           $dossier_item = array(
             "idDossier" => $idDossier,
             "libelleDossier" => $libelleDossier,
-            "resumeEnML" => $commentaireDossier,
-            "idDevis" => $idDevis
+            "resumeEnML" => $resumeEnML
           );
 
           // Push to "data"

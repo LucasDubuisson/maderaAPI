@@ -18,7 +18,8 @@
 
   // Get post
   $paiement->read_one();
-
+if ($paiement->dateDernierPaiement!=null)
+{
   // Create array
   $paiement_arr = array(
             "idPaiement" => $paiement->idPaiement,

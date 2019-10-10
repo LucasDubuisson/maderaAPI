@@ -18,7 +18,8 @@
 
   // Get post
   $module->read_one();
-
+if ($module->libelleModule!=null)
+{
   // Create array
   $module_arr = array(
       "idModule" => $module->idModule,

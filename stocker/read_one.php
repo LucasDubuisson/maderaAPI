@@ -20,7 +20,8 @@
 
   // Get post
   $stocker->read_one();
-
+if ($stocker->quantite!=null)
+{
   // Create array
   $stocker_arr = array(
       "idSite" => $stocker->idSite,

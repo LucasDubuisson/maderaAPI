@@ -18,7 +18,9 @@
 
   // Get post
   $devis->read_one();
-
+  
+if ($devis->prixDevis!=null)
+{
   // Create array
   $devis_arr = array(
       		"idDevis" => $idDevis, 
@@ -36,7 +38,7 @@
   print_r(json_encode($devis_arr));
    // set response code - 200 OK 
 }
- 
+
 else{
     // set response code - 404 Not found
     http_response_code(404);

@@ -18,7 +18,8 @@
 
   // Get post
   $commande->read_one();
-
+if ($commande->dateCommande!=null)
+{
   // Create array
   $commande_arr = array(
 	"idCommande" => $commande->idCommande,

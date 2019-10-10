@@ -18,7 +18,8 @@
 
   // Get post
   $regleCalcul->read_one();
-
+if ($regleCalcul->ennonceRegleCalcul!=null)
+{
   // Create array
   $regleCalcul_arr = array(
             "idRegleCalcul" => $idRegleCalcul,

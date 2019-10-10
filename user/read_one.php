@@ -18,7 +18,8 @@
 
   // Get post
   $utilisateur->read_one();
-
+if ($utilisateur->nomUser!=null)
+{
   // Create array
   $user_arr = array(
     	"idUser" => $utilisateur->idUser,

@@ -18,7 +18,8 @@
 
   // Get post
   $service->read_one();
-
+if ($service->libelleService!=null)
+{
   // Create array
   $service_arr = array(
       "idService" => $service->idService,

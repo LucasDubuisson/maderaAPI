@@ -18,7 +18,8 @@
 
   // Get post
   $familleComposant->read_one();
-
+if ($familleComposant->libelleFamilleComposant!=null)
+{
   // Create array
   $familleComposant_arr = array(
       "idFamilleComposant" => $familleComposant->idFamilleComposant,

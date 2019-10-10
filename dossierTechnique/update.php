@@ -22,7 +22,6 @@
  
   $dossier->libelleDossier = $data->libelleDossier;
   $dossier->resumeEnML = $data->resumeEnML;
-  $dossier->idDevis = $data->idDevis;
   $dossier->idDossier = $data->idDossier;
 
   // Update dossier

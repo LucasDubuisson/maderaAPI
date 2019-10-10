@@ -20,7 +20,6 @@
 
   $dossier->libelleDossier = $data->libelleDossier;
   $dossier->resumeEnML = $data->resumeEnML;
-  $dossier->idDevis = $data->idDevis;
   // Create dossier
   if($dossier->create()) {
 	      http_response_code(200);

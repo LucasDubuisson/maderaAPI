@@ -18,7 +18,8 @@
 
   // Get post
   $maison->read_one();
-
+if ($maison->libelleMaison!=null)
+{
   // Create array
   $maison_arr = array(
       "idMaison" => $maison->idMaison,

@@ -18,7 +18,8 @@
 
   // Get post
   $direction->read_one();
-
+if ($direction->libelleDirection!=null)
+{
   // Create array
   $direction_arr = array(
       "idDirection" => $direction->idDirection,

@@ -18,7 +18,8 @@
 
   // Get post
   $fournisseur->read_one();
-
+if ($fournisseur->libellefournisseur!=null)
+{
   // Create array
   $fournisseur_arr = array(
 			"idFournisseur" => $fournisseur->idFournisseur,

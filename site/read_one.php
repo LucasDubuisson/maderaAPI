@@ -18,7 +18,8 @@
 
   // Get post
   $site->read_one();
-
+if ($site->libelleSite!=null)
+{
   // Create array
   $site_arr = array(
             "idSite" => $site->idSite,

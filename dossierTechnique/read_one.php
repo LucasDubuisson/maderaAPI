@@ -18,13 +18,13 @@
 
   // Get post
   $dossier->read_one();
-
+if ($dossier->libelleDossier!=null)
+{
   // Create array
   $dossier_arr = array(
       "idDossier" => $dossier->idDossier,
       "libelleDossier" => $dossier->libelleDossier,
-      "resumeEnML" => $dossier->resumeEnML,
-      "idDevis" => $dossier->idDevis
+      "resumeEnML" => $dossier->resumeEnML
   );
 
   // Make JSON
