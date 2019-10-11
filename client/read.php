@@ -14,7 +14,7 @@
   $client = new Client($db);
 
   // Category read query
-  $result = $read();
+  $result = $client-> read();
   
   // Get row count
   $num = $result->rowCount();

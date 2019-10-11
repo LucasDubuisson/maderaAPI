@@ -23,14 +23,14 @@ if ($devis->prixDevis!=null)
 {
   // Create array
   $devis_arr = array(
-      		"idDevis" => $idDevis, 
-			"prixDevis" =>  $prixDevis,
-			"etatDevis" =>  $etatDevis, 
-			"dateDevis" =>  $dateDevis,
-			"dateEvolutionDevis" =>  $dateEvolutionDevis, 
-			"avancementDevisByUserId" =>  $avancementDevisByUserId,
-			"idDossier" =>  $idDossier, 
-			"idMaison" =>  $idMaison
+      		"idDevis" => $devis->idDevis, 
+			"prixDevis" =>  $devis->prixDevis,
+			"etatDevis" =>  $devis->etatDevis, 
+			"dateDevis" =>  $devis->dateDevis,
+			"dateEvolutionDevis" =>  $devis->dateEvolutionDevis, 
+			"avancementDevisByUserId" =>  $devis->avancementDevisByUserId,
+			"idDossier" =>  $devis->idDossier, 
+			"idMaison" =>  $devis->idMaison
 			);
 
   // Make JSON

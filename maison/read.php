@@ -29,10 +29,10 @@
           extract($row);
 
           $maison_item = array(
-			  "idMaison" => $maison->idMaison,
-			  "libelleMaison" => $maison->libelleMaison,
-			  "dateCreationMaison" => $maison->dateCreationMaison,
-			  "createdByUserIdMaison" => $maison->createdByUserIdMaison
+			  "idMaison" => $idMaison,
+			  "libelleMaison" => $libelleMaison,
+			  "dateCreationMaison" => $dateCreationMaison,
+			  "createdByUserIdMaison" => $createdByUserIdMaison
           );
 
           // Push to "data"

@@ -24,14 +24,25 @@
         // Cat array
         $devis_arr = array();
         $devis_arr['data'] = array();
-
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
           extract($row);
-
+		  $statutText='';
+			switch ($etatDevis) {
+				case 0:
+					$statutText="En attente";
+					break;
+				case 1:
+					$statutText="Validé";
+					break;
+				case 2:
+					$statutText="Refusé";
+					break;
+			}
           $devis_item = array(
 			"idDevis" => $idDevis, 
 			"prixDevis" =>  $prixDevis,
 			"etatDevis" =>  $etatDevis, 
+			"statutDevis"=>$statutText,
 			"dateDevis" =>  $dateDevis,
 			"dateEvolutionDevis" =>  $dateEvolutionDevis, 
 			"avancementDevisByUserId" =>  $avancementDevisByUserId,

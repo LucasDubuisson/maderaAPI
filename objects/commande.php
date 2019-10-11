@@ -3,7 +3,7 @@ class Commande{
   
     // database connection and table name 
     private $conn; 
-    private $table_name = "commande"; 
+    private $table_name = "Commande"; 
   
     // object properties 
     public $idCommande; 

@@ -13,7 +13,7 @@ class Module{
 	public $uniteUsageModule; 
 	public $finitionModule;
 	public $typeIsolantModule; 
-	public $typeCouvertureModule,
+	public $typeCouvertureModule;
 	public $huisseriesModule;
 	public $idRegleCalcul;
 	

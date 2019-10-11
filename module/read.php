@@ -29,15 +29,16 @@
           extract($row);
 
           $module_item = array(
-			  "idModule" => $module->idModule,
-			  "libelleModule" => $module->libelleModule,
-			  "natureModule" => $module->natureModule,
-			  "uniteUsageModule" => $module->uniteUsageModule,
-			  "moduleFinition" => $module->moduleFinition,
-			  "typeIsolantModule" => $module->typeIsolantModule,
-			  "typeCouvertureModule" => $module->typeCouvertureModule,
-			  "huisseriesModule" => $module->huisseriesModule,
-			  "idRegleCalcul" => $module->idRegleCalcul
+			  "idModule" => $idModule,
+			  "libelleModule" => $libelleModule,
+			  "natureModule" => $natureModule,
+			  "caractModule" => $caractModule,
+			  "uniteUsageModule" => $uniteUsageModule,
+			  "finitionModule" => $finitionModule,
+			  "typeIsolantModule" => $typeIsolantModule,
+			  "typeCouvertureModule" => $typeCouvertureModule,
+			  "huisseriesModule" => $huisseriesModule,
+			  "idRegleCalcul" => $idRegleCalcul
           );
 
           // Push to "data"

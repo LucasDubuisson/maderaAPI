@@ -27,7 +27,7 @@ class Devis{
 			prixDevis, 
 			etatDevis, 
 			dateDevis,
-			dateEvolutionDevis, 
+			dateEvolutionDevis,
 			avancementDevisByUserId,
 			idDossier, 
 			idMaison
